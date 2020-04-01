@@ -4,10 +4,10 @@ let server = http.createServer((req, res) => {
     console.log('some request');
     let message = 'yoyo';
     switch (req.url) {
-        case '/':
-            res.write(`HOME`);
+        case '/users':
+            res.write(`[{"id": 1, "name": "Sasha"}, {"id": 2, "name": "Max"}]`);
             break;
-        case '/tasks':
+        case '/lessons':
             res.write(`tasks`);
             break;
         default:
