@@ -1,9 +1,15 @@
-import React, {useEffect} from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+
 import './App.css';
 
 function App() {
-  useEffect();
+ const [users, setUsers] = useState([]);
+
+  useEffect( () => {
+    axios.get("http://localhost:7542/users").then(res => {
+      res.data
+    })
+  }, []);
   return (
     <div>
 
