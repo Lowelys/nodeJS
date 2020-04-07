@@ -1,4 +1,7 @@
 let http = require('http');
+let {getUsers, addUser} = require('./repository');
+
+
 
 let cors = (res, req) => {
     // Set CORS headers
@@ -21,9 +24,15 @@ let server = http.createServer((req, res) => {
     let message = 'yoyo';
     switch (req.url) {
         case '/users':
-            res.write(`[{"id": 1, "banned": true, "name": "Sasha"}, {"id": 2, "name": "Max"}]`);
+            if (req.method ==="POST") {
+                addUser('Lesha')
+                res.write(JSON.stringify({success: true}));
+                } else {
+                    res.write(JSON.stringify(getUsers()));
+                }
+            
             break;
-        case '/lessons':
+        case "/lessons":
             res.write(`tasks`);
             break;
         default:
