@@ -1,5 +1,5 @@
 let http = require('http');
-let {getUsers, addUser} = require('./repository');
+let { usersController } = require('./usersController');
 
 
 
@@ -18,19 +18,12 @@ let cors = (res, req) => {
 }
 
 let server = http.createServer((req, res) => {
-    if (cors(res, req)) return;
+    if (cors(res, req)) return; 
 
     console.log('some request');
     let message = 'yoyo';
     switch (req.url) {
-        case '/users':
-            if (req.method ==="POST") {
-                addUser('Lesha')
-                res.write(JSON.stringify({success: true}));
-                } else {
-                    res.write(JSON.stringify(getUsers()));
-                }
-            
+        case '/users': usersController(req, res);
             break;
         case "/lessons":
             res.write(`tasks`);
@@ -38,8 +31,7 @@ let server = http.createServer((req, res) => {
         default:
             res.write(`PAGE NOT FOUND`);
     }
-    res.end();
+    
 });
 
 server.listen(7542);
-console.log(http);
