@@ -1,16 +1,13 @@
-//let users = [
- //   { "id": 1, "banned": true, "name": "Sasha" },
- //   { "id": 2, "name": "Max" }
-// ];
-
 const fs = require("fs");
 
 const getUsers = (callback) => {
-
-
+let promise = new Promise( (resolve, reject) => {
     fs.readFile("users.json", function (err, buf) {
-        callback(buf.toString());
+        resolve(buf.toString());
     });
+});
+    return promise;
+    
 };
 
 const addUser = (name) => {
