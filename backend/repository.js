@@ -1,9 +1,9 @@
 const fs = require("fs");
 
-const getUsers = (callback) => {
+const getUsers = () => {
 let promise = new Promise( (resolve, reject) => {
     fs.readFile("users.json", function (err, buf) {
-        resolve(buf.toString());
+        resolve(JSON.parse(buf.toString()));
     });
 });
     return promise;
@@ -11,7 +11,15 @@ let promise = new Promise( (resolve, reject) => {
 };
 
 const addUser = (name) => {
-    users.push(users.push({ name: name }));
+    let users = await getUsers();
+    users.push({ name: name });
+    fs.writeFile("users.json", JSON.stringify(users), (err) => {
+        if (err) console.log(err);
+        console.log("Successfully Written to File.");
+      });
+      return new Promise ( (res, rej) => {
+          
+      })
 }
 
 exports.getUsers = getUsers;

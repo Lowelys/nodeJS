@@ -10,27 +10,26 @@ let [users, setUsers] = arr;
 
 function App() {
     const [users, setUsers] = useState([]);
-    const gerUsers = () => {
-        axios.get("http://localhost:7542/users").then(res => {
+    const getUsers = () => {
+        axios.get("http://localhost:7542/users")
+            .then(res => {
             setUsers(res.data);
         });
     };
 
 
     useEffect(() => {
-gerUsers();
+getUsers();
     }, []);
 
     const creatUser = () => {
         axios.post("http://localhost:7542/users")
             .then(res => {
-               gerUsers();
+               getUsers();
                 });
     };
     return (<>
-            <div>
-                <button onClick={creatUser}>Creat new</button>
-            </div>
+            <div><button onClick={creatUser}>Creat new</button></div>
             <div>{users.map(u => <div>{u.name}</div>)}</div>
         </>
     );

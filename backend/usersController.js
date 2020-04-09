@@ -2,12 +2,12 @@ let { getUsers, addUser } = require('./repository');
 
 exports.usersController = async (req, res) => {
     if (req.method === "POST") {
-        addUser('Lesha')
+        let result = await addUser('Lesha')
         res.write(JSON.stringify({ success: true }));
         res.end();
     } else {
         let users = await getUsers();
-            res.write(users);
+            res.write(JSON.stringify(users));
             res.end();
  
 
