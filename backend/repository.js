@@ -1,25 +1,16 @@
 const fs = require("fs");
+const {readJsonFromFile, writeJsonToFile} = require("./fs-utils");
 
 const getUsers = () => {
-let promise = new Promise( (resolve, reject) => {
-    fs.readFile("users.json", function (err, buf) {
-        resolve(JSON.parse(buf.toString()));
-    });
-});
-    return promise;
-    
+    return readJsonFromFile("users.json");
+
 };
 
-const addUser = (name) => {
+const addUser = async (name) => {
     let users = await getUsers();
     users.push({ name: name });
-    fs.writeFile("users.json", JSON.stringify(users), (err) => {
-        if (err) console.log(err);
-        console.log("Successfully Written to File.");
-      });
-      return new Promise ( (res, rej) => {
-          
-      })
+    return writeJsonToFile("users.json", users);
+  
 }
 
 exports.getUsers = getUsers;

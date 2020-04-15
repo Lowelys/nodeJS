@@ -1,4 +1,4 @@
-let { getUsers, addUser } = require('./repository');
+let { getUsers, addUser } = require("./repository");
 
 exports.usersController = async (req, res) => {
     if (req.method === "POST") {
