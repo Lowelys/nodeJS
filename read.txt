@@ -1,0 +1,2 @@
+D:\Project\nodeJS\backend
+nodemon --inspect index.js localhost 7542
