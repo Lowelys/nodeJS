@@ -1,37 +1,25 @@
-let http = require('http');
-let { usersController } = require('./usersController');
+const {addUser, getUsers} = require ("./repository");
+const express = require('express');
+const app = express();
 
-
-
-let cors = (res, req) => {
-    // Set CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Request-Method', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    if (req.method === 'OPTIONS') {
-        res.writeHead(200);
-        res.end();
-        return true;
-    }
-    return false;
-}
-
-let server = http.createServer((req, res) => {
-    if (cors(res, req)) return;
-
-    console.log('some request');
-    let message = 'yoyo';
-    switch (req.url) {
-        case '/users': usersController(req, res);
-            break;
-        case "/lessons":
-            res.write(`tasks`);
-            break;
-        default:
-            res.write(`PAGE NOT FOUND`);
-    }
-
+app.get('/users', async  (req, res) => {
+    let users = await getUsers();
+    res.send(users);
 });
 
-server.listen(7542);
+app.post('/users', async  (req, res) => {
+    let result = await addUser('Lesha');
+    res.send({success: true});
+});
+
+app.get('/tasks', async  (req, res) => {
+    res.send("tasks");
+});
+
+app.use((req, res) => {
+    res.send(404);
+})
+
+app.listen(7542, function () {
+    console.log('Example app listening on port 7542!');
+});
