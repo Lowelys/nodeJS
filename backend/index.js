@@ -18,7 +18,7 @@ let cors = (res, req) => {
 }
 
 let server = http.createServer((req, res) => {
-    if (cors(res, req)) return; 
+    if (cors(res, req)) return;
 
     console.log('some request');
     let message = 'yoyo';
@@ -31,7 +31,7 @@ let server = http.createServer((req, res) => {
         default:
             res.write(`PAGE NOT FOUND`);
     }
-    
+
 });
 
 server.listen(7542);
