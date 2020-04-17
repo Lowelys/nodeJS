@@ -22,15 +22,18 @@ function App() {
         getUsers();
     }, []);
 
-    const creatUser = () => {
-        axios.post("http://localhost:7542/users", {name: userNameRef.current.value})
+    const creatUser = (e) => {
+        axios.post("http://localhost:7542/users", {name: })
             .then(res => {
                 getUsers();
             });
     };
 
+    let onChange = (e) => {
+        setValue(e.currentTarget.value)
+    };
     return (<>
-            <input ref={userNameRef}/>
+            <input ref={onChange} ref={inputRef}/>
             <div><button onClick={creatUser}>Creat new</button></div>
             <div>{users.map(u => <div>{u.name}</div>)}</div>
         </>
