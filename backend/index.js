@@ -1,17 +1,12 @@
 const {addUser, getUsers} = require ("./repository");
 const express = require('express');
+const users = require('./users-router');
+const cors = require('cors');
+
 const app = express();
 
-app.get('/users', async  (req, res) => {
-    let users = await getUsers();
-    res.send(users);
-});
-
-app.post('/users', async  (req, res) => {
-    let result = await addUser('Lesha');
-    res.send({success: true});
-});
-
+app.use(cors());
+app.use('/users', users);
 app.get('/tasks', async  (req, res) => {
     res.send("tasks");
 });
